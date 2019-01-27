@@ -9,7 +9,7 @@ public class AddingTwoNumbersLambdaHarness {
          * Fot multiple statements you need curly braces
          */
 
-        //Addition addition = (a,b) -> a + b;
+        Addition addition = (a,b) -> a + b;
 
         Addition addition1 = (a,b) -> {
             Integer c = a + b;
@@ -17,5 +17,7 @@ public class AddingTwoNumbersLambdaHarness {
         };
 
         System.out.println("The addition of two numbers is: " + addition1.add(7367238, 32862837));
+        
+        System.out.println("The addition of two numbers is: " + addition.add(7367238, 32862837));
     }
 }
