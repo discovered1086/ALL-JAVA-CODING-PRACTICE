@@ -1,9 +1,9 @@
-package mypractice.collectionsandgenerics;
-
-import mypractice.collectionsandgenerics.utility.CommonCollectionGenerator;
+package com.kingshuk.collectionandgenerics;
 
 import java.util.Iterator;
 import java.util.ListIterator;
+
+import com.kingshuk.collectionandgenerics.utility.CommonCollectionGenerator;
 
 /**
  * This class is to practice iterators
