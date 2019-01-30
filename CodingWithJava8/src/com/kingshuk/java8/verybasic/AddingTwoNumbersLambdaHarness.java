@@ -9,7 +9,13 @@ public class AddingTwoNumbersLambdaHarness {
          * Fot multiple statements you need curly braces
          */
 
-        Addition addition = (a,b) -> a + b;
+    	/*
+    	 * The below is an example of valid lambda expression if we insist on using 
+    	 * the return keyword.
+    	 * Addition addition = (a,b) -> {return a + b;};
+    	 */
+    	
+    	Addition addition = (a,b) -> a+b;
 
         Addition addition1 = (a,b) -> {
             Integer c = a + b;
