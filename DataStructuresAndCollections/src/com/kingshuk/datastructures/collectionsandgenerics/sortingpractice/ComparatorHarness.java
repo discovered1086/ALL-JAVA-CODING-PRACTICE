@@ -16,9 +16,7 @@ import com.kingshuk.datastructures.collectionsandgenerics.sortingpractice.compar
  */
 public class ComparatorHarness {
 
-    public ComparatorHarness() {
-    }
-
+    
     public static void main(String[] args) {
         List<Player> playerList = new ArrayList<Player>();
 

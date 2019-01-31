@@ -21,7 +21,7 @@ public class AnimalCustomComparatorHarness {
 
         List<Dog> dogList= CommonCollectionGenerator.getListOfDogObjects();
 
-        AnimalCustomComparator<Cat> catCustomComparator=new CatCustomComparator();
+        AnimalCustomComparatorHarness catCustomComparator=new AnimalCustomComparatorHarness();
 
         AnimalCustomComparator<Dog> dogCustomComparator=new DogCustomComparator();
 
