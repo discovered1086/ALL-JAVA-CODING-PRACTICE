@@ -1,4 +1,4 @@
-package com.kingshuk.java8.useincollections;
+package com.kingshuk.datastructures.sortingandcomparison;
 
 import java.util.Comparator;
 

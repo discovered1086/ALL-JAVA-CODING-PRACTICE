@@ -7,5 +7,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/DataStructuresAndCollections"/>
 	<classpathentry kind="output" path="out/production/CodingWithJava8"/>
 </classpath>
