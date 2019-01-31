@@ -17,7 +17,11 @@ public class CollectionWithoutLambdaHarness {
 		
 		Collections.sort(employees, new EmployeeAscendingOrderComparator());
 		
-		System.out.println("After sorting: "+employees);
+		System.out.println("After sorting in ascending order: "+employees);
+		
+		Collections.sort(employees, new EmployeeDescendingOrderComparator());
+		
+		System.out.println("After sorting in descending order: "+employees);
 	}
 
 }
