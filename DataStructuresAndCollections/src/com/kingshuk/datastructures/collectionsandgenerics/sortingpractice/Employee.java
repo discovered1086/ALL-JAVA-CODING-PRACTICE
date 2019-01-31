@@ -1,4 +1,4 @@
-package com.kingshuk.datastructures.sortingandcomparison;
+package com.kingshuk.datastructures.collectionsandgenerics.sortingpractice;
 
 public class Employee implements Comparable<Employee>{
 	

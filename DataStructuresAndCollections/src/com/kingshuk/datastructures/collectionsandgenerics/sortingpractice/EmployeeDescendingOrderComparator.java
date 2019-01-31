@@ -1,4 +1,4 @@
-package com.kingshuk.datastructures.sortingandcomparison;
+package com.kingshuk.datastructures.collectionsandgenerics.sortingpractice;
 
 import java.util.Comparator;
 

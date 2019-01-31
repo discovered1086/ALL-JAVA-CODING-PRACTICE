@@ -25,7 +25,7 @@ public class AnimalCustomComparatorHarness {
 
         AnimalCustomComparator<Dog> dogCustomComparator=new DogCustomComparator();
 
-        Collections.sort(catList, catCustomComparator);
+        
 
         System.out.println("The sorted cat objects are \n");
 
