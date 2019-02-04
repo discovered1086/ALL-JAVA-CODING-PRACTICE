@@ -39,13 +39,13 @@ public class ExecutorServicePracticeHarness {
 		
 		
 		try {
-			/*for(int i=0; i<10; i++) {
-				System.out.println("Parent thread");
-				Thread.sleep(1000);
-			}*/
-			
 			System.out.println("First task returned: "+ submit.get());
 			System.out.println("Second task returned: "+submit2.get());
+			
+			for(int i=0; i<10; i++) {
+				System.out.println("Parent thread");
+				//Thread.sleep(1000);
+			}
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
