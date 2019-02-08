@@ -22,9 +22,10 @@ public class ReadingFromConsoleHarness {
 		Character[] arrayChar = new Character[1000];
 
 		int index = 0;
-		while ((char) bufferedReader.read() != 'q') {
+		char c;
+		while ((c=(char) bufferedReader.read()) != 'q') {
 			if (index < 1000) {
-				arrayChar[index] = (char) bufferedReader.read();
+				arrayChar[index] = c;
 			} else {
 				break;
 			}
