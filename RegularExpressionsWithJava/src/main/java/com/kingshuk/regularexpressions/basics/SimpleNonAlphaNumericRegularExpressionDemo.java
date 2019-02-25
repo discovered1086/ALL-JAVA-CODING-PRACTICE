@@ -27,7 +27,7 @@ public class SimpleNonAlphaNumericRegularExpressionDemo {
 		while (matcher.find()) {
 			
 			//I only want to know what  special character is found
-			System.out.println("The special character is: "+matcher.group());
+			System.out.println("The special character is: "+matcher.group()+" at index: "+matcher.start());
 		}
 	}
 
