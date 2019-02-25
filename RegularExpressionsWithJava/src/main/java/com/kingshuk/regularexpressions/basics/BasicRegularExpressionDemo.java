@@ -18,6 +18,10 @@ public class BasicRegularExpressionDemo {
 		while (matcher.find()) {
 			count++;
 
+			//The matcher.end() method has been implemented to return the end index+1 value
+			
+			//Here matcher.group tells us which pattern got a match in the target string we have passed.
+
 			System.out.println(matcher.start() + "..." + matcher.end() + "...." + matcher.group());
 		}
 		
