@@ -6,11 +6,14 @@ import java.util.regex.Pattern;
 public class QuantifierPracticeDemo {
 
 	public static void main(String[] args) {
-				
+		
+		//This means at least one @
 		String regularExpression1 = "@+";
 		
+		//This means any number of @ including zero
 		String regularExpression2 = "@*";
 		
+		//This means at most one @ including zero
 		String regularExpression3 = "@?";
 		
 		//This means exactly one @
