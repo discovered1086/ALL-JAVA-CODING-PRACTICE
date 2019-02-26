@@ -13,6 +13,9 @@ public class QuantifierPracticeDemo {
 		
 		String regularExpression3 = "@?";
 		
+		//This means exactly one @
+		String regularExpression4="@";
+		
 		//String regularExpression2 = "[.+]";
 		
 		//A valid email address
@@ -23,15 +26,18 @@ public class QuantifierPracticeDemo {
 		
 		String targetString3 = "sly.mania42@@@";
 		
-		Pattern pattern = Pattern.compile(regularExpression3);
+		Pattern pattern = Pattern.compile(regularExpression4);
 		
 		Matcher matcher =  pattern.matcher(targetString3);
 		
+		boolean isEmailValid = false;
+		
 		while(matcher.find()) {
 			System.out.println("The start: "+matcher.start()+" The group: "+matcher.group());
-			System.out.println("This is a valid email address");
+			isEmailValid = true;
 		}
 		
+		System.out.println("Is this is a valid email address? "+isEmailValid);
 		
 	}
 	
