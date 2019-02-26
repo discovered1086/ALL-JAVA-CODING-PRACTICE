@@ -7,19 +7,31 @@ public class QuantifierPracticeDemo {
 
 	public static void main(String[] args) {
 		
-		//This means at least one @
+		/*
+		 * This means if at least one @ is present,
+		 * it is considered as  part of a single match
+		 */
 		String regularExpression1 = "@+";
 		
-		//This means any number of @ including zero
+		/*
+		 * This means any number of @ including zero
+		 * is  considered as part of a single match
+		 * 
+		 */
 		String regularExpression2 = "@*";
 		
-		//This means at most one @ including zero
+		/*
+		 * This means at most one @ including zero
+		 * is considered to be part of a single match
+		 */
 		String regularExpression3 = "@?";
 		
-		//This means exactly one @
+		/*
+		 * This means exactly one @ is
+		 * considered to be part of a single match
+		 */
 		String regularExpression4="@";
 		
-		//String regularExpression2 = "[.+]";
 		
 		//A valid email address
 		String targetString1= "sly.mania42@gmail.com";
