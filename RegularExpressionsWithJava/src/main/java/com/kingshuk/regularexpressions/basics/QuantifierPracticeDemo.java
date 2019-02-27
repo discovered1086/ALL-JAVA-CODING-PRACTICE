@@ -41,11 +41,13 @@ public class QuantifierPracticeDemo {
 		
 		String targetString3 = "sly.mania42@@@";
 		
-		Pattern pattern = Pattern.compile(regularExpression4);
+		Pattern pattern = Pattern.compile(regularExpression3);
 		
 		Matcher matcher =  pattern.matcher(targetString3);
 		
 		boolean isEmailValid = false;
+		
+		System.out.println("The length of the target string is: "+targetString3.length());
 		
 		while(matcher.find()) {
 			System.out.println("The start: "+matcher.start()+" The group: "+matcher.group());

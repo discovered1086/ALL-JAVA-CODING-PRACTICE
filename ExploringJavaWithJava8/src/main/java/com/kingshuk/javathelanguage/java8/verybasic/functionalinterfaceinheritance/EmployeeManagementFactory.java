@@ -1,6 +1,6 @@
 package com.kingshuk.javathelanguage.java8.verybasic.functionalinterfaceinheritance;
 
-import com.kingshuk.java8.verybasic.Employee;
+import com.kingshuk.javathelanguage.java8.verybasic.Employee;
 
 @FunctionalInterface
 public interface EmployeeManagementFactory {
