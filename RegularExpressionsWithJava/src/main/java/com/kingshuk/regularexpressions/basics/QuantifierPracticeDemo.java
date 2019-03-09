@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class QuantifierPracticeDemo {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		/*

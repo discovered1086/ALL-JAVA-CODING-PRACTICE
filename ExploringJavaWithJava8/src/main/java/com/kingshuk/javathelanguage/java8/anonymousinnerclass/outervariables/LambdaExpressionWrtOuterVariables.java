@@ -15,10 +15,17 @@ public class LambdaExpressionWrtOuterVariables {
 			/**
 			 * We can directly access the outer class and outer method variables from
 			 * within a lambda expression
+			 * 
+			 * But the local variables within the enclosing method act as final variables 
+			 * if they're used inside the lambda expression
 			 */
+			x = x+10;
+						
 			System.out.println("The value of X is "+x);
-			System.out.println("The value of Y is "+y);
+			//System.out.println("The value of Y is "+y);
 		};
+		
+		y=y+100;
 		
 		functionalInterface2.m1();
 	}

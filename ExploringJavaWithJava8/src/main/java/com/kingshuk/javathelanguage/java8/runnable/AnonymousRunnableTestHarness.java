@@ -14,9 +14,11 @@ public class AnonymousRunnableTestHarness {
 
 
         /**
-         * This is an example of how lambda expressions can be used as anonymous inner classes
-         * The conventional way of doing it would have been to write new Runnable() inside the
-         * constructor of the Thread instance. We no longer need to do that while using the lambda expression
+         * This is an example of how lambda expressions can be used 
+         * as anonymous inner classes. The conventional way of doing 
+         * it would have been to write new Runnable() inside the
+         * constructor of the Thread instance. We no longer need to 
+         * do that while using the lambda expression
          */
         new Thread(()->{
             for (int i = 0; i < 10; i++) {
