@@ -1,4 +1,4 @@
-package com.kingshuk.javathelanguage.java8.functions;
+package com.kingshuk.javathelanguage.java8.predefinedinterfaces.functions;
 
 import java.util.function.Function;
 

@@ -1,4 +1,4 @@
-package com.kingshuk.javathelanguage.java8.predicate;
+package com.kingshuk.javathelanguage.java8.predefinedinterfaces.predicate;
 
 import java.util.function.Predicate;
 
@@ -12,6 +12,6 @@ public class PredicateTestHarness {
          */
         Predicate<String> checkName = name-> name.contains("King");
 
-        System.out.println("Does the name Deeksha contain the word?"+checkName.test("Deeksha"));
+        System.out.println("Does the name Kingshuk contain the word?"+checkName.test("Kingshuk"));
     }
 }
