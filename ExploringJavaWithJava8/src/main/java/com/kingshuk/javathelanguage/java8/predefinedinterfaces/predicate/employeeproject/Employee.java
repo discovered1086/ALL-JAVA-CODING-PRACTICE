@@ -50,7 +50,7 @@ public class Employee {
 			if(checkSalary.negate().test(salary) ||
 					checkDesignationAndLocation.test(employeeLocation, designation)) {
 				if (checkSalary.negate().test(salary)) {
-					message = "Employee Salary must be greater than designation minimum";
+					message = String.format("Employee Salary must be greater than designation minimum of %.2f",designation.minimumSalary);
 				}
 				
 				if(checkDesignationAndLocation.test(employeeLocation, designation)) {

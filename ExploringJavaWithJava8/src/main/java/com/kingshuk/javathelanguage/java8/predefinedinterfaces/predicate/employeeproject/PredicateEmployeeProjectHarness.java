@@ -5,7 +5,7 @@ public class PredicateEmployeeProjectHarness {
 	public static void main(String[] args) {
 
 		Employee employee = Employee.createInnerClass().createEmployee("Kingshuk Mukherjee", EmployeeLocation.CHENNAI,
-				Designation.DEVELOPER, 68000.00);
+				Designation.DEVELOPER, 65000.00);
 
 		System.out.println("The employee object is:" + employee);
 	}
