@@ -52,11 +52,11 @@ public class PredicateEmployeeProjectHarness {
 		 */
 
 		// Printing managers list with streams
-		List<Employee> managersList = employeeList.stream().filter(thePredicate).collect(Collectors.toList());
+		List<Employee> filteredList = employeeList.stream().filter(thePredicate).collect(Collectors.toList());
 
 		System.out.println("The selected employees are: ");
 
-		managersList.forEach(emp -> System.out.println(emp.getEmployeeName()));
+		filteredList.forEach(emp -> System.out.println(emp.getEmployeeName()));
 	}
 
 }
