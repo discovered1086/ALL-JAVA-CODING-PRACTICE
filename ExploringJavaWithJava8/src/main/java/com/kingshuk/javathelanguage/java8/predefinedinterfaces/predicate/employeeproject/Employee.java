@@ -54,8 +54,9 @@ public class Employee {
 				}
 				
 				if(checkDesignationAndLocation.test(employeeLocation, designation)) {
-					message = message.concat(" "+ designation.designationName+" can't work from "+
-								employeeLocation.city);
+					message = message.concat(String.format(" A %s can't work from %s", designation.designationName, employeeLocation.city));
+					
+					
 				}
 				
 				throw new EmployeeCreationException(message);
