@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class PredicateEmployeeProjectHarness {
+public class PredicateEmployeeProjectUsingIsEqualHarness {
 
 	public static void main(String[] args) {
 		List<Employee> employeeList = null;
@@ -25,43 +25,41 @@ public class PredicateEmployeeProjectHarness {
 
 		// System.out.println("The employee list is:" + employeeList);
 
+		/**
+		 * We can write this predicate as below, instead of writing
+		 * Predicate<Employee> selectManagers = employee -> employee.getDesignation().equals(Designation.MANAGER);
+		 */
+		Predicate<Designation> selectManagersDesignation = Predicate.isEqual(Designation.MANAGER);
+
+		Predicate<Designation> selectDevelopersDesignation = Predicate.isEqual(Designation.DEVELOPER);
 		
-		Predicate<Employee> selectManagers = employee -> employee.getDesignation().equals(Designation.MANAGER);
-
-		Predicate<Employee> selectDevelopers = employee -> employee.getDesignation().equals(Designation.DEVELOPER);
-
-		Predicate<Employee> selectSalary = employee -> employee.getSalary() < 70000.00;
+		//Predicate<Employee> selectSalary = employee -> employee.getSalary() < 70000.00;
 
 		System.out.println("-------------Filtering managers from the list--------------");
 
-		filterEmployees(selectManagers, employeeList);
+		filterEmployees(selectManagersDesignation, employeeList);
 
 		System.out.println("-------------Filtering managers from the list--------------\n\n");
 
 		System.out.println("-------------Filtering developers from the list--------------");
 
-		filterEmployees(selectDevelopers, employeeList);
+		filterEmployees(selectDevelopersDesignation, employeeList);
 
 		System.out.println("-------------Filtering developers from the list--------------\n\n");
 
-		System.out.println("-------------Filtering developers who earn less than 70k from the list--------------");
+		/*System.out.println("-------------Filtering developers who earn less than 70k from the list--------------");
 
 		filterEmployees(selectDevelopers.and(selectSalary), employeeList);
 
-		System.out.println("-------------Filtering developers who earn less than 70k from the list--------------\n\n");
+		System.out.println("-------------Filtering developers who earn less than 70k from the list--------------\n\n");*/
 	}
 
-	public static void filterEmployees(Predicate<Employee> thePredicate, List<Employee> employeeList) {
-
-		// Printing managers list without streams
-		/*
-		 * employeeList.forEach((emp) -> { if(selectManagers.test(emp)) {
-		 * System.out.println("The managers in this project are: "+emp.getEmployeeName()
-		 * ); } });
-		 */
+	public static void filterEmployees(Predicate<Designation> thePredicate, List<Employee> employeeList) {
 
 		// Printing managers list with streams
-		List<Employee> filteredList = employeeList.stream().filter(thePredicate).collect(Collectors.toList());
+		List<Employee> filteredList = employeeList.stream()
+												.filter(emp -> thePredicate.test(emp.getDesignation()))
+												.collect(Collectors.toList());
 
 		System.out.println("The selected employees are: ");
 
