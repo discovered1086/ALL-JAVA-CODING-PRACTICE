@@ -1,6 +1,7 @@
 package com.kingshuk.javathelanguage.java8.predefinedinterfaces.functions;
 
 import java.util.function.Function;
+import java.util.function.ToIntFunction;
 
 public class FunctionTestHarness {
     public static void main(String[] args) {
@@ -11,8 +12,17 @@ public class FunctionTestHarness {
          * the predicates
          */
 
-        Function<String, Boolean> checkExistenceOfWord=name->name.contains("K");
+        //Function<String, Integer> checkLengthOfWord=name->name.length();
+    	
+    	//System.out.println("The lenth of the word is: "+checkLengthOfWord.apply("Kingshuk"));
+    	
+    	/*
+    	 * ToIntFunction is a special type of function which always returns an integer.
+    	 */
+    	//ToIntFunction<String> checkLengthOfWord=name->name.length();
+    	
+    	ToIntFunction<String> checkLengthOfWord=String::length;
 
-        System.out.println(checkExistenceOfWord.apply("Kingshuk"));
+        System.out.println("The lenth of the word is: "+checkLengthOfWord.applyAsInt("Kingshuk"));
     }
 }
