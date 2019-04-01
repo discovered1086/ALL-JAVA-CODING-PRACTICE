@@ -7,7 +7,22 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
 
-public class StudentGradeFunctionTest {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+class Student {
+	private String name;
+
+	private int marks;
+}
+
+public class StudentGradeFunctionTest2 {
 	private static Map<IntPredicate, String> gradeCodeMap = new HashMap<>();
 
 	static {
@@ -20,8 +35,6 @@ public class StudentGradeFunctionTest {
 	}
 
 	public static void main(String[] args) {
-
-		IntPredicate marksPredicate = marks -> marks <= 70;
 
 		Function<Integer, String> gradeFinderFunction = marks -> {
 			String grade = "";
@@ -42,11 +55,8 @@ public class StudentGradeFunctionTest {
 				new Student("Amit", 85), new Student("Mainak", 25));
 
 		students.forEach(student -> {
-			if (marksPredicate.test(student.getMarks())) {
-				System.out.println(
-						"Grade for " + student.getName() + " is " + gradeFinderFunction.apply(student.getMarks()));
-			}
-
+			System.out
+					.println("Grade for " + student.getName() + " is " + gradeFinderFunction.apply(student.getMarks()));
 		});
 	}
 
