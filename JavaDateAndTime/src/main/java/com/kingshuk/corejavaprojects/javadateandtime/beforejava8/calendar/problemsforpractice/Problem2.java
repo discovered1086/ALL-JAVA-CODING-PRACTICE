@@ -1,5 +1,6 @@
 package com.kingshuk.corejavaprojects.javadateandtime.beforejava8.calendar.problemsforpractice;
 
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
 /**
@@ -17,8 +18,10 @@ public class Problem2 {
 	public static void main(String[] args) {
 		Calendar calendar = Calendar.getInstance();
 		
+		DateFormatSymbols dateSymbols = new DateFormatSymbols();
+		
 		System.out.println("The year is: "+calendar.get(Calendar.YEAR));
-		System.out.println("The month is: "+calendar.get(Calendar.MONTH));
+		System.out.println("The month is: "+dateSymbols.getMonths()[calendar.get(Calendar.MONTH)]);
 		System.out.println("The day is: "+calendar.get(Calendar.DATE));
 		System.out.println("The hour is: "+calendar.get(Calendar.HOUR));
 		System.out.println("The minute is: "+calendar.get(Calendar.MINUTE));
