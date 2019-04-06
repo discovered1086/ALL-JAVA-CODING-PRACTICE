@@ -2,15 +2,13 @@ package com.kingshuk.javathelanguage.java8.predefinedinterfaces.functions;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.ToDoubleFunction;
 
 import com.kingshuk.javathelanguage.java8.predefinedinterfaces.predicate.employeeproject.Designation;
 import com.kingshuk.javathelanguage.java8.predefinedinterfaces.predicate.employeeproject.Employee;
 import com.kingshuk.javathelanguage.java8.predefinedinterfaces.predicate.employeeproject.EmployeeLocation;
 
-public class EmployeeSalaryAgreegationDemo {
+public class EmployeeSalaryIncrementDemo {
 
 	public static void main(String[] args) {
 		Employee employee1 = Employee.createInnerClass().createEmployee("Kingshuk Mukherjee", EmployeeLocation.CHENNAI,
@@ -23,34 +21,31 @@ public class EmployeeSalaryAgreegationDemo {
 				Designation.DEVELOPER, 75000.00, "03/29/2012");
 		Employee employee5 = Employee.createInnerClass().createEmployee("Mainak Biswas", EmployeeLocation.BANGALORE,
 				Designation.TESTER, 65000.00, "03/29/2018");
-
+		
 		List<Employee> employeeList = Arrays.asList(employee1, employee2, employee3, employee4, employee5);
-
-		Consumer<List<Employee>> printSalary = allEmployees ->
-			allEmployees.forEach(
-					emp -> System.out.println("Salary of " + emp.getEmployeeName() + " is " + emp.getSalary()));
-
-		System.out.println("Before increment.....");
-
-		printSalary.accept(employeeList);
-
-		Function<List<Employee>, List<Employee>> incrementSalaryFunction = employees -> {
-			Double totalSalaryIncrement = 5000.00;
-
-			Predicate<Employee> checkDeveloper = emp -> emp.getDesignation().equals(Designation.DEVELOPER);
-
+		
+		/*Function<List<Employee>, Double> getTotalSalary = employees -> {
+			Double totalSalary = 0.00;
+			
 			for (Employee employee : employeeList) {
-				if (checkDeveloper.test(employee)) {
-					employee.setSalary(employee.getSalary() + totalSalaryIncrement);
-				}
+				totalSalary+=employee.getSalary();
 			}
-
-			return employees;
+			
+			return totalSalary;
+		};*/
+		
+		ToDoubleFunction<List<Employee>> getTotalSalary = employees -> {
+			Double totalSalary = 0.00;
+			
+			for (Employee employee : employeeList) {
+				totalSalary+=employee.getSalary();
+			}
+			
+			return totalSalary;
 		};
-
-		System.out.println("After increment.....");
-
-		printSalary.accept(incrementSalaryFunction.apply(employeeList));
+		
+		System.out.println("Total salary of employees is: "+
+		Math.round(getTotalSalary.applyAsDouble(employeeList)));
 	}
 
 }
