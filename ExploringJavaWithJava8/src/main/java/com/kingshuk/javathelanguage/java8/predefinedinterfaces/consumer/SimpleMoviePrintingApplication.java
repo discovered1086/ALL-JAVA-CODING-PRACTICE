@@ -5,30 +5,8 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
-import lombok.Builder;
-import lombok.Data;
+import com.kingshuk.javathelanguage.java8.predefinedinterfaces.consumer.pojos.Movie;
 
-@Data
-@Builder
-//@ToString(exclude = "movieId")
-class Movie{
-	
-	private Integer movieId;
-	
-	private String movieName;
-	
-	private String movieLanguage;
-	
-	private Float movieRatings;
-
-	@Override
-	public String toString() {
-		return String.format("The movie '%s' is a(n) %s movie that got %.1f rating",
-							this.movieName, this.movieLanguage, this.movieRatings);
-	}
-	
-	
-}
 
 
 public class SimpleMoviePrintingApplication {
