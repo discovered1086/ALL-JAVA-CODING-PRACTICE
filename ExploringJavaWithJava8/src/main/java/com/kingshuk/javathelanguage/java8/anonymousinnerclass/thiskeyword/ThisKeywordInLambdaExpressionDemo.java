@@ -7,6 +7,7 @@ public class ThisKeywordInLambdaExpressionDemo {
 
 	public void callAdd() {
 
+		@SuppressWarnings("unused")
 		DummyFunctionalInterface functionalInterface = () -> {
 
 			int x = 900;
