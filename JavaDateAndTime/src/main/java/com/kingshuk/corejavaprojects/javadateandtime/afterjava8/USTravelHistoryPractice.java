@@ -3,6 +3,7 @@ package com.kingshuk.corejavaprojects.javadateandtime.afterjava8;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class USTravelHistoryPractice {
 
@@ -48,16 +49,23 @@ public class USTravelHistoryPractice {
 				.plus(Period.between(departureDate1, arrivalDate2)).plus(Period.between(departureDate2, arrivalDate3))
 				.plus(Period.between(departureDate3, arrivalDate4));
 
-		System.out.println(Period.between(departureDate1, arrivalDate2));
-
-		System.out.println(Period.between(departureDate2, arrivalDate3));
-
-		System.out.println(Period.between(departureDate3, arrivalDate4));
+		
+		long duration1 = departureDate1.until(arrivalDate2, ChronoUnit.DAYS);
+		
+		long duration2 = departureDate2.until(arrivalDate3, ChronoUnit.DAYS);
+		
+		long duration3 = departureDate3.until(arrivalDate4, ChronoUnit.DAYS);
+		
+		System.out.println("You have stayed "+ (duration1+duration2+duration3) + " days outside of the US");
+		
+		LocalDate maxOutDate2 = arrivalDate1.plus(Period.ofYears(6)).plusDays(duration1+duration2+duration3);
 
 		// System.out.println("Total number of days spent outside of US : " +
 		// periodOutSideOfUS.getDays() + " days");
 
 		System.out.println("Your H1B Max out date is: " + maxOutDate);
+		
+		System.out.println("Your H1B Max out date (By the second method) is: " + maxOutDate2);
 
 	}
 
