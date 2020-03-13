@@ -21,13 +21,14 @@ public class ParticularTimeOfDayTest {
 
 		OffsetDateTime dateTime = OffsetDateTime.of(LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT),
 				ZoneOffset.of("-5"));
-		
+
 		System.out.println(dateTime);
-		
+
 		OffsetDateTime dateTime2 = OffsetDateTime.of(LocalDateTime.of(LocalDate.now(), LocalTime.NOON),
 				ZoneOffset.of("-5"));
 		
 		System.out.println(dateTime2);
+
 	}
 
 }
