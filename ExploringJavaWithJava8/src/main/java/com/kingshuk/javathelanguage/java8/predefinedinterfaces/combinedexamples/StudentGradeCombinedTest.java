@@ -51,12 +51,11 @@ public class StudentGradeCombinedTest {
 		List<Student> students = Arrays.asList(new Student("Kingshuk", 65), new Student("Deeksha", 95),
 				new Student("Amit", 85), new Student("Mainak", 25));
 
-		Consumer<List<Student>> processStudents = processedStudents -> {
+		Consumer<List<Student>> processStudents = processedStudents -> 
 			processedStudents.forEach(student -> {
 				System.out.println(
 						"Grade for " + student.getName() + " is " + gradeFinderFunction.apply(student.getMarks()));
 			});
-		};
 
 		processStudents.accept(students);
 

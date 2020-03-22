@@ -38,7 +38,7 @@ public class QuantifierPracticeDemo {
 		String targetString1= "sly.mania42@gmail.com";
 		
 		//An invalid email address
-		String targetString2 = "sly.mania42";
+		//String targetString2 = "sly.mania42";
 		
 		String targetString3 = "sly.mania42@@@";
 		
