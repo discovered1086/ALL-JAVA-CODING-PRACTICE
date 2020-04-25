@@ -1,4 +1,4 @@
-package com.kingshuk.corejavaprojects.javadateandtime.afterjava8;
+package com.kingshuk.corejavaprojects.javadateandtime.afterjava8.zonedatetime;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

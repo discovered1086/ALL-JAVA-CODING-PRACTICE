@@ -1,4 +1,4 @@
-package com.kingshuk.corejavaprojects.javadateandtime;
+package com.kingshuk.corejavaprojects.javadateandtime.afterjava8;
 
 import java.time.Instant;
 import java.time.LocalDate;

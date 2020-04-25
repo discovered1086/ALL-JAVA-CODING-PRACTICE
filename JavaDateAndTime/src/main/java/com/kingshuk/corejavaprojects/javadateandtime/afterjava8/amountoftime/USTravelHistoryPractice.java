@@ -1,4 +1,4 @@
-package com.kingshuk.corejavaprojects.javadateandtime.afterjava8;
+package com.kingshuk.corejavaprojects.javadateandtime.afterjava8.amountoftime;
 
 import java.time.LocalDate;
 import java.time.Period;

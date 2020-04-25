@@ -1,4 +1,4 @@
-package com.kingshuk.corejavaprojects.javadateandtime.afterjava8;
+package com.kingshuk.corejavaprojects.javadateandtime.afterjava8.amountoftime;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -16,6 +16,10 @@ public class DurationAndInstantTest {
 		Duration duration = Duration.between(now1, now2);
 
 		System.out.println(duration.toMillis());
+		
+		Instant now3 = Instant.now();
+		
+		System.out.println(now3.plus(duration));
 
 	}
 
