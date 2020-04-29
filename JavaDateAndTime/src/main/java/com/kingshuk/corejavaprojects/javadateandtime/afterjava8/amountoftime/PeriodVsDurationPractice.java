@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
+
 
 public class PeriodVsDurationPractice {
 
@@ -14,11 +16,17 @@ public class PeriodVsDurationPractice {
 
 		LocalDateTime dt3 = dt.plusDays(1l);
 
-		LocalDateTime dt4 = dt2.plusDays(1l);
-
 		System.out.println(Duration.between(dt, dt3));
 
 		System.out.println(Period.between(dt.toLocalDate(), dt3.toLocalDate()));
+		
+		System.out.println(Period.between(dt.toLocalDate(), dt2.toLocalDate()));
+		
+		System.out.println(ChronoUnit.DAYS.between(dt, dt2));
+		
+		System.out.println(ChronoUnit.MONTHS.between(dt, dt2));
+		
+		System.out.println(ChronoUnit.WEEKS.between(dt, dt2));
 
 	}
 
