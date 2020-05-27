@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 
 class PrivateConstructorClass {
 
-	private PrivateConstructorClass() {
+	PrivateConstructorClass() {
 		System.out.println("Class object created");
 	}
 }
