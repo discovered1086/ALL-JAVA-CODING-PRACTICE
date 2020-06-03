@@ -4,9 +4,9 @@ import java.lang.reflect.Field;
 
 import com.kingshuk.reflectionsannotations.model.CategoryEntity;
 
-public class CategoryEntityTest {
+public class CategoryEntityFieldDemo {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		CategoryEntity categoryEntity = CategoryEntity.builder().categoryId("CTGRY1").categoryName("Grocery").build();
 
 		Class<? extends CategoryEntity> class1 = categoryEntity.getClass();
@@ -25,6 +25,12 @@ public class CategoryEntityTest {
 		for (Field field : declaredFields) {
 			System.out.println(field.getName());
 		}
+		
+		Field field = class1.getDeclaredField("categoryName");
+		field.setAccessible(true);
+		field.set(categoryEntity, "Rent Payment");
+		
+		System.out.println(categoryEntity);
 	}
 
 }
