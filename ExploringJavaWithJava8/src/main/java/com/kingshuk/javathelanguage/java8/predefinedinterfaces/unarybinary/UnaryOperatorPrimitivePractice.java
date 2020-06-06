@@ -1,4 +1,4 @@
-package com.kingshuk.javathelanguage.java8.unarybinary;
+package com.kingshuk.javathelanguage.java8.predefinedinterfaces.unarybinary;
 
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.IntUnaryOperator;
