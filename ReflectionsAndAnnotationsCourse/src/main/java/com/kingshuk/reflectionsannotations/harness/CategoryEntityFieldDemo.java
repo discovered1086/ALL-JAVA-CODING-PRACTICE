@@ -1,4 +1,4 @@
-package com.kingshuk.reflectionsannotations;
+package com.kingshuk.reflectionsannotations.harness;
 
 import java.lang.reflect.Field;
 

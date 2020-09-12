@@ -1,4 +1,4 @@
-package com.kingshuk.reflectionsannotations;
+package com.kingshuk.reflectionsannotations.harness;
 
 public class GettingClassInformationDemo {
 
