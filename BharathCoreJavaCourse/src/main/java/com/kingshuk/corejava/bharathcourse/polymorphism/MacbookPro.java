@@ -1,6 +1,11 @@
 package com.kingshuk.corejava.bharathcourse.polymorphism;
 
+import lombok.Getter;
+
+@Getter
 public class MacbookPro extends MacbookLaptop {
+	
+	String name = "MacbookPro";
 
 	@Override
 	public void start() {
