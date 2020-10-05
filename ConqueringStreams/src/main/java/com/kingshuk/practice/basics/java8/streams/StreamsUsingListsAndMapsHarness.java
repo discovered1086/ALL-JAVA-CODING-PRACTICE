@@ -1,14 +1,18 @@
-package com.kingshuk.practice.basics.java8;
+package com.kingshuk.practice.basics.java8.streams;
+
+import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.toSet;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import static java.util.stream.Collectors.*;
+
+import com.kingshuk.practice.basics.java8.streams.util.StreamsPracticeUtil;
 
 public class StreamsUsingListsAndMapsHarness {
 
 	public static void main(String[] args) {
-		List<Person> personList = StreamsPracticeHarness.getPersonList();
+		List<Person> personList = StreamsPracticeUtil.getPersonList();
 
 		//Give me the names of all males
 		Set<String> namesList = personList.stream()

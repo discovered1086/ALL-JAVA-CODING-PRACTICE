@@ -1,4 +1,4 @@
-package com.kingshuk.practice.basics.java8;
+package com.kingshuk.practice.basics.java8.streams;
 
 public enum Gender {
 	MALE,

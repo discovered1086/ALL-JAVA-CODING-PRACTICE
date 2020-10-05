@@ -1,12 +1,14 @@
-package com.kingshuk.practice.basics.java8;
+package com.kingshuk.practice.basics.java8.streams;
 
 import java.util.List;
 import java.util.Optional;
 
+import com.kingshuk.practice.basics.java8.streams.util.StreamsPracticeUtil;
+
 public class StreamsMoreReduceHarness {
 
 	public static void main(String[] args) {
-		List<Person> personList = StreamsPracticeHarness.getPersonList();
+		List<Person> personList = StreamsPracticeUtil.getPersonList();
 
 		// Get the oldest person from the list
 		Optional<Integer> maxAge = personList.stream()
