@@ -30,12 +30,16 @@ public class USTravelHistoryPractice {
 		LocalDate departureDate3 = LocalDate.parse(dates[5], formatter);
 
 		Period lengthofStay1 = Period.between(arrivalDate1, departureDate1);
+		
+		System.out.println(lengthofStay1);
 
-		// Period lengthofStay2 = Period.between(arrivalDate2, departureDate2);
+		Period lengthofStay2 = Period.between(arrivalDate2, departureDate2);
+		
+		System.out.println(lengthofStay2);
 
-		// Period lengthofStay3 = Period.between(arrivalDate3, departureDate3);
+		Period lengthofStay3 = Period.between(arrivalDate3, departureDate3);
 
-		// Period lengthofCurrentStay = Period.between(arrivalDate4, LocalDate.now());
+		Period lengthofCurrentStay = Period.between(arrivalDate4, LocalDate.now());
 
 		System.out.println("Length of first stay: " + ChronoUnit.MONTHS.between(arrivalDate1, departureDate1) + MONTHS);
 
@@ -49,9 +53,13 @@ public class USTravelHistoryPractice {
 
 		Period periodOfPossibleStay = Period.ofYears(6);
 
+		Period totalLengthOfStay = lengthofCurrentStay.plus(lengthofStay3).plus(lengthofStay2).plus(lengthofStay1);
+
+		System.out.println("Total duration spent on H1B: " + totalLengthOfStay);
+
 		LocalDate maxOutDate = arrivalDate1.plus(periodOfPossibleStay)
 				.plus(Period.between(departureDate1, arrivalDate2)).plus(Period.between(departureDate2, arrivalDate3))
-				.plus(Period.between(departureDate3, arrivalDate4));
+				.plus(Period.between(departureDate2, arrivalDate3));
 
 		long duration1 = departureDate1.until(arrivalDate2, ChronoUnit.DAYS);
 
