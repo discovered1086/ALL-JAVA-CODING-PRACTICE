@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Documented
 @Inherited
-@Target({ElementType.TYPE, ElementType.TYPE_USE})
+@Target({ElementType.TYPE, ElementType.TYPE_USE, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Aggregate {
 

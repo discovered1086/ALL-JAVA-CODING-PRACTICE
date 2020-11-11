@@ -1,4 +1,4 @@
-package com.kingshuk.reflectionsannotations.model;
+package com.kingshuk.reflectionsannotations.reflection.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +16,7 @@ public class CategoryEntity {
 	private int active;
 
 	private CategoryEntity() {
-
+		throw new UnsupportedOperationException();
 	}
 
 	public CategoryEntity categoryFactory(String categoryId, 

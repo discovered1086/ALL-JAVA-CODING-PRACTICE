@@ -1,4 +1,4 @@
-package com.kingshuk.reflectionsannotations.annotations;
+package com.kingshuk.reflectionsannotations.annotations.model;
 
 import com.kingshuk.reflectionsannotations.annotations.customannotations.Aggregate;
 import com.kingshuk.reflectionsannotations.annotations.customannotations.VehicleType;
@@ -17,14 +17,8 @@ public class Vehicle<@VehicleType T> {
 	
 	private @Aggregate String registrationNo;
 	
-	@Aggregate
 	private String vehicleCategory;
 	
 	private T make;
 
 }
-
-
-//class PassengerCar extends Vehicle<>{
-//	
-//}

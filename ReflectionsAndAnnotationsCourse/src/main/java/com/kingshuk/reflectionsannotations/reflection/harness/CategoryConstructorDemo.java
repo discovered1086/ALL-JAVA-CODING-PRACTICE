@@ -1,8 +1,8 @@
-package com.kingshuk.reflectionsannotations.harness;
+package com.kingshuk.reflectionsannotations.reflection.harness;
 
 import java.lang.reflect.Constructor;
 
-import com.kingshuk.reflectionsannotations.model.CategoryEntity;
+import com.kingshuk.reflectionsannotations.reflection.model.CategoryEntity;
 
 public class CategoryConstructorDemo {
 

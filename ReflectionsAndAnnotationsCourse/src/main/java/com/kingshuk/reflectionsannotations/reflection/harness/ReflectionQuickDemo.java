@@ -1,4 +1,4 @@
-package com.kingshuk.reflectionsannotations.harness;
+package com.kingshuk.reflectionsannotations.reflection.harness;
 
 import java.lang.reflect.Constructor;
 
