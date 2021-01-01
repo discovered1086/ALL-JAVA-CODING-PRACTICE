@@ -23,18 +23,20 @@ public class PurityOfFunctionsHarness {
 //			.map(String::toUpperCase)
 //			.forEach(listOfNames::add);
 //
-//		List<String> listOfNames = personList.parallelStream()
-//				.filter(person -> person.getAge() > 30).map(Person::getName)
-//				.map(String::toUpperCase).reduce(new ArrayList<String>(), // The initial value of reduce operation
-//						(names, name) -> {
-//							names.add(name);
-//							return names;
-//						}, (names1, names2) -> {
-//							names1.addAll(names2);
-//							return names1;
-//						});
-//
-//		listOfNames.forEach(System.out::println);
+		List<String> listOfNames = personList.parallelStream()
+				.filter(person -> person.getAge() > 30)
+				.map(Person::getName)
+				.map(String::toUpperCase)
+				.reduce(new ArrayList<String>(), // The initial value of reduce operation
+						(names, name) -> {
+							names.add(name);
+							return names;
+						}, (names1, names2) -> {
+							names1.addAll(names2);
+							return names1;
+						});
+
+		listOfNames.forEach(System.out::println);
 		
 		
 		personList.parallelStream()
