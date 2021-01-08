@@ -5,6 +5,9 @@ import com.kingshuk.practice.basics.java8.streams.util.StreamsPracticeUtil;
 
 import java.util.List;
 
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.*;
+
 public class MaxByGroupingWithCollectors {
 
     public static void main(String[] args) {
@@ -20,6 +23,35 @@ public class MaxByGroupingWithCollectors {
         System.out.println(personList.stream()
                 .mapToInt(Person::getAge)
                 .sum());
+
+        //The max operation
+        System.out.println(personList.stream()
+                .mapToInt(Person::getAge)
+                .max());
+
+        //Get the oldest person in the group
+        //#1
+        System.out.println(personList.stream()
+                .collect(maxBy(comparing(Person::getAge))));
+
+        //#2
+        System.out.println(personList.stream().max(comparing(Person::getAge)));
+
+        //Get the youngest person in the group
+        //#1
+        System.out.println(personList.stream()
+                .collect(minBy(comparing(Person::getAge))));
+
+        //#2
+        System.out.println(personList.stream().min(comparing(Person::getAge)));
+
+        //Get the name of the oldest person the group
+        String name = personList.stream()
+                .collect(collectingAndThen(
+                        maxBy(comparing(Person::getAge)),
+                        optionalPerson -> optionalPerson.map(Person::getName).orElse("")));
+
+        System.out.println("The oldest person in the group is: " + name);
     }
 
 }
