@@ -3,18 +3,19 @@ package com.kingshuk.reflectionsannotations.miniormtool.databaseconnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 public interface BaseConnection {
 	// list of methods
-	public Connection getMyConnection() throws Exception;
+	Connection getMyConnection() throws Exception;
 
-	public void closeConnection(Connection con);
+	void closeConnection(Connection con);
 
-	public void closeStatement();
+	void closeStatement(Statement statement);
 
-	public void closePreparedStatement(PreparedStatement ps);
+	void closePreparedStatement(PreparedStatement ps);
 
-	public void closeCallableStatement();
+	void closeCallableStatement();
 
-	public void closeResultset(ResultSet rs);
+	void closeResultSet(ResultSet rs);
 }

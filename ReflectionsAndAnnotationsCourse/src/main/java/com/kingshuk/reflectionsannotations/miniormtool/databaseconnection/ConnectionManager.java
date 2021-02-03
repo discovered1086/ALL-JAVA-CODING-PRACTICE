@@ -1,11 +1,7 @@
 package com.kingshuk.reflectionsannotations.miniormtool.databaseconnection;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Objects;
 
 import lombok.Getter;
@@ -51,7 +47,7 @@ public class ConnectionManager implements BaseConnection, Serializable {
     }
 
 
-    public void closeResultset(ResultSet rs) {
+    public void closeResultSet(ResultSet rs) {
         try {
             if (!rs.isClosed()) {
                 rs.close();
@@ -72,8 +68,14 @@ public class ConnectionManager implements BaseConnection, Serializable {
         }
     }
 
-    public void closeStatement() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void closeStatement(Statement statement) {
+        try {
+            if (Objects.nonNull(statement) && !statement.isClosed()) {
+                statement.close();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("error occurred while closing the connection");
+        }
     }
 
     public void closePreparedStatement(PreparedStatement ps) {

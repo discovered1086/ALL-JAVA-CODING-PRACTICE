@@ -7,11 +7,12 @@ import com.kingshuk.reflectionsannotations.miniormtool.annotations.PrimaryKey;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.StringJoiner;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -31,7 +32,6 @@ public class ORMProcessor<E> {
 
     public void saveEntity(E theEntity) {
         StringBuilder sqlQuery = new StringBuilder(255);
-        String tableName = null;
         PreparedStatement ps = null;
         try (Connection connection = connectionManager.getMyConnection();) {
 
@@ -41,17 +41,7 @@ public class ORMProcessor<E> {
             Class<? extends Object> class1 = theEntity.getClass();
 
             // Then let's get the table name.
-            DatabaseEntity annotation = class1.getAnnotation(DatabaseEntity.class);
-
-            if (Objects.nonNull(annotation)) {
-                tableName = annotation.tableName();
-            }
-
-            if (Objects.isNull(tableName)) {
-                tableName = class1.getSimpleName().toUpperCase();
-            }
-
-            sqlQuery.append(tableName).append("(");
+            sqlQuery.append(getTableName(class1)).append("(");
 
             // get all the fields
             Field[] declaredFields = class1.getDeclaredFields();
@@ -106,6 +96,95 @@ public class ORMProcessor<E> {
         } finally {
             connectionManager.closePreparedStatement(ps);
         }
+    }
+
+    public Optional<E> readData(Class<E> clazz, Object primaryKeyValue) {
+        Statement statement = null;
+        Optional<E> newInstance = Optional.empty();
+        try (Connection connection = connectionManager.getMyConnection();) {
+            statement = connection.createStatement();
+            StringBuilder sqlQuery = new StringBuilder(255);
+            //Get the table name;
+            String tableName = getTableName(clazz);
+
+            sqlQuery.append("SELECT * FROM ").append(tableName).append(" WHERE ");
+
+            // get all the fields
+            Field[] declaredFields = clazz.getDeclaredFields();
+
+            AtomicReference<String> primaryKeyColumn = new AtomicReference<>("");
+
+            Arrays.stream(declaredFields)
+                    .filter(field -> field.isAnnotationPresent(PrimaryKey.class))
+                    .map(field -> field.getAnnotation(PrimaryKey.class))
+                    .findFirst().ifPresent(primaryKey1 -> primaryKeyColumn.set(primaryKey1.columnName()));
+
+            sqlQuery.append(primaryKeyColumn.get()).append("= '").append(primaryKeyValue).append("'");
+
+            System.out.println("The query is: " + sqlQuery.toString());
+
+            ResultSet resultSet = statement.executeQuery(sqlQuery.toString());
+
+            while (resultSet.next()) {
+                E object = clazz.getConstructor().newInstance();
+
+                Arrays.stream(declaredFields)
+                        .forEach(field -> {
+                            try {
+                                String columnName = null;
+                                if (field.isAnnotationPresent(PrimaryKey.class)) {
+                                    PrimaryKey primaryKey = field.getAnnotation(PrimaryKey.class);
+                                    columnName = primaryKey.columnName();
+                                } else if (field.isAnnotationPresent(DatabaseColumn.class)) {
+                                    DatabaseColumn databaseColumn = field.getAnnotation(DatabaseColumn.class);
+                                    columnName = databaseColumn.columnName();
+                                }
+
+                                Object columnValue = getColumnValue(field.getType(), resultSet, columnName);
+
+                                Method method = object.getClass().getMethod("set" + field.getName().substring(0, 1).toUpperCase()
+                                        + field.getName().substring(1), field.getType());
+
+                                method.invoke(object, columnValue);
+
+                            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
+                        });
+
+                newInstance = Optional.of(object);
+            }
+
+        } catch (ClassNotFoundException | SQLException
+                | IllegalArgumentException | NoSuchMethodException
+                | IllegalAccessException | InstantiationException
+                | InvocationTargetException e) {
+            e.printStackTrace();
+        } finally {
+            connectionManager.closeStatement(statement);
+        }
+
+        return newInstance;
+    }
+
+    private Object getColumnValue(Class<?> columnType, ResultSet resultSet, String columnName) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        String methodName = "get" + columnType.getSimpleName().substring(0, 1).toUpperCase()
+                + columnType.getSimpleName().substring(1);
+        Method method = ResultSet.class.getMethod(methodName, String.class);
+        return method.invoke(resultSet, columnName);
+    }
+
+    private String getTableName(Class<?> class1) {
+        DatabaseEntity annotation = class1.getAnnotation(DatabaseEntity.class);
+        String tableName = null;
+        if (Objects.nonNull(annotation)) {
+            tableName = annotation.tableName();
+        }
+
+        if (Objects.isNull(tableName)) {
+            tableName = class1.getSimpleName().toUpperCase();
+        }
+        return tableName;
     }
 
 }

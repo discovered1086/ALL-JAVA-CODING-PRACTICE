@@ -24,12 +24,6 @@ public class CategoryEntity {
 
 	@DatabaseColumn(columnName = "ACTIVE")
 	private int active;
-
-	public CategoryEntity(String categoryName, String categoryDescription, int active) {
-		this.categoryName = categoryName;
-		this.categoryDescription = categoryDescription;
-		this.active = active;
-	}
 	
 	
 }
