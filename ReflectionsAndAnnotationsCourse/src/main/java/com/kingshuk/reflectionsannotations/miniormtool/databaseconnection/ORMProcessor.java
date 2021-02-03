@@ -1,100 +1,111 @@
 package com.kingshuk.reflectionsannotations.miniormtool.databaseconnection;
 
-import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Objects;
-
 import com.kingshuk.reflectionsannotations.miniormtool.annotations.DatabaseColumn;
 import com.kingshuk.reflectionsannotations.miniormtool.annotations.DatabaseEntity;
 import com.kingshuk.reflectionsannotations.miniormtool.annotations.PrimaryKey;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Objects;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class ORMProcessor<E> {
 
-	private ConnectionManager connectionManager;
+    private ConnectionManager connectionManager;
 
-	public void setConnectionManager(ConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
-	}
+    private ORMProcessor() {
+        //throw new UnsupportedOperationException("This is not allowed");
+    }
 
-	public void saveEntity(E theEntity) {
-		// Connection connection = null;
-		// PreparedStatement ps = null;
-		StringBuilder sqlQuery = new StringBuilder(255);
-		String tableName = null;
-		try (Connection connection = connectionManager.getMyConnection();
-				PreparedStatement ps = connection.prepareStatement(sqlQuery.toString());) {
+    public static <E> ORMProcessor<E> getInstance(ConnectionManager connectionManager) {
+        ORMProcessor<E> newEntity = new ORMProcessor<>();
+        newEntity.connectionManager = connectionManager;
+        return newEntity;
+    }
 
-			sqlQuery.append("INSERT INTO ");
+    public void saveEntity(E theEntity) {
+        StringBuilder sqlQuery = new StringBuilder(255);
+        String tableName = null;
+        PreparedStatement ps = null;
+        try (Connection connection = connectionManager.getMyConnection();) {
 
-			// first let's get the class object of E
-			Class<? extends Object> class1 = theEntity.getClass();
+            sqlQuery.append("INSERT INTO ");
 
-			// Then let's get the table name.
-			DatabaseEntity annotation = class1.getAnnotation(DatabaseEntity.class);
+            // first let's get the class object of E
+            Class<? extends Object> class1 = theEntity.getClass();
 
-			if (Objects.nonNull(annotation)) {
-				tableName = annotation.tableName();
+            // Then let's get the table name.
+            DatabaseEntity annotation = class1.getAnnotation(DatabaseEntity.class);
 
-				if (Objects.nonNull(tableName)) {
-					tableName = class1.getSimpleName().toUpperCase();
-				}
-			}
+            if (Objects.nonNull(annotation)) {
+                tableName = annotation.tableName();
+            }
 
-			sqlQuery.append(tableName).append("(");
+            if (Objects.isNull(tableName)) {
+                tableName = class1.getSimpleName().toUpperCase();
+            }
 
-			// get all the fields
-			Field[] declaredFields = class1.getDeclaredFields();
+            sqlQuery.append(tableName).append("(");
 
-			for (int i = 0; i < declaredFields.length; i++) {
-				Field field = declaredFields[i];
-				if (field.isAnnotationPresent(PrimaryKey.class)) {
-					PrimaryKey primaryKey = field.getAnnotation(PrimaryKey.class);
+            // get all the fields
+            Field[] declaredFields = class1.getDeclaredFields();
 
-					sqlQuery.append(primaryKey.columnName());
-				} else if (field.isAnnotationPresent(DatabaseColumn.class)) {
-					DatabaseColumn databaseColumn = field.getAnnotation(DatabaseColumn.class);
+            StringJoiner joiner = new StringJoiner(",");
 
-					sqlQuery.append(databaseColumn.columnName());
-				}
+            for (Field field : declaredFields) {
+                if (field.isAnnotationPresent(PrimaryKey.class)) {
+                    PrimaryKey primaryKey = field.getAnnotation(PrimaryKey.class);
+                    //sqlQuery.append(primaryKey.columnName());
+                    joiner.add(primaryKey.columnName());
+                } else if (field.isAnnotationPresent(DatabaseColumn.class)) {
+                    DatabaseColumn databaseColumn = field.getAnnotation(DatabaseColumn.class);
+                    //sqlQuery.append(databaseColumn.columnName());
+                    joiner.add(databaseColumn.columnName());
+                }
+            }
 
-				if (i != declaredFields.length - 1) {
-					sqlQuery.append(",");
-				}
-			}
+            sqlQuery.append(joiner.toString())
+                    .append(")")
+                    .append(" VALUES (");
 
-			sqlQuery.append(")").append(" VALUES (");
 
-			for (int i = 0; i < declaredFields.length; i++) {
-				sqlQuery.append("?");
+            final String questionMarks = IntStream.range(0, declaredFields.length)
+                    .mapToObj(e -> "?")
+                    .collect(Collectors.joining(","));
 
-				if (i != declaredFields.length - 1) {
-					sqlQuery.append(",");
-				}
-			}
+            sqlQuery.append(questionMarks).append(")");
 
-			sqlQuery.append(")");
+            System.out.println("The query is:" + sqlQuery);
 
-			int index = 1;
+            ps = connection.prepareStatement(sqlQuery.toString());
 
-			for (Field field : declaredFields) {
-				if (field.isAnnotationPresent(PrimaryKey.class) || field.isAnnotationPresent(DatabaseColumn.class)) {
-					if (field.getType().equals(String.class)) {
-						ps.setString(index, String.valueOf(field.get(theEntity)));
-					} else if (field.getType().equals(int.class)) {
-						ps.setInt(index, (Integer) field.get(theEntity));
-					}
-				}
-			}
-			
-			ps.execute();
+            int index = 1;
 
-			//
-		} catch (ClassNotFoundException | SQLException | IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
+            for (Field field : declaredFields) {
+                if (field.isAnnotationPresent(PrimaryKey.class) || field.isAnnotationPresent(DatabaseColumn.class)) {
+                    field.setAccessible(true);
+                    String simpleName = field.getType().getSimpleName();
+                    String methodName = "set" + simpleName.substring(0, 1).toUpperCase() + simpleName.substring(1);
+                    Method method = PreparedStatement.class.getMethod(methodName, int.class, field.getType());
+                    method.invoke(ps, index, field.get(theEntity));
+                }
+                index++;
+            }
 
-	}
+            ps.executeUpdate();
+
+            //
+        } catch (ClassNotFoundException | SQLException | IllegalArgumentException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
+        } finally {
+            connectionManager.closePreparedStatement(ps);
+        }
+    }
 
 }

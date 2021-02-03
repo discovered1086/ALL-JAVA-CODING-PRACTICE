@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,6 @@ public class ConnectionManager implements BaseConnection, Serializable {
 	private static final long serialVersionUID = -367117343703416863L;
 	private String connectionDriver="oracle.jdbc.driver.OracleDriver";
     private String url="jdbc:oracle:thin:@kingsdatabase.csum1qcusypo.us-east-2.rds.amazonaws.com:1521:kingsdb1";
-    private String dbname="mydatabase";
     private String username="hibernate_practice";
     private String entryKey ="Iofdtiger#16";
 
@@ -30,7 +30,6 @@ public class ConnectionManager implements BaseConnection, Serializable {
     public ConnectionManager(String connectionDriver, String url, String dbname, String username, String password) {
         this.connectionDriver = connectionDriver;
         this.url = url;
-        this.dbname = dbname;
         this.username = username;
         this.entryKey = password;
     }
@@ -39,7 +38,7 @@ public class ConnectionManager implements BaseConnection, Serializable {
         Connection mmcon = null;
         try {
             Class.forName(connectionDriver);
-            mmcon = DriverManager.getConnection(url + dbname, username, entryKey);
+            mmcon = DriverManager.getConnection(url, username, entryKey);
             System.out.println( "connection created");
         } catch (ClassNotFoundException ex) {
             throw new ClassNotFoundException("the driver manager class cannot be found");
@@ -79,7 +78,7 @@ public class ConnectionManager implements BaseConnection, Serializable {
 
     public void closePreparedStatement(PreparedStatement ps) {
         try {
-            if (!ps.isClosed()) {
+            if (Objects.nonNull(ps) && !ps.isClosed()) {
                 ps.close();
             }
         } catch (SQLException ex) {

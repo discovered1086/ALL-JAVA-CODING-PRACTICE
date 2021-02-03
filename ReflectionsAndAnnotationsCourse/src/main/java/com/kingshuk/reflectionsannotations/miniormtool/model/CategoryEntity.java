@@ -4,14 +4,13 @@ import com.kingshuk.reflectionsannotations.miniormtool.annotations.DatabaseEntit
 import com.kingshuk.reflectionsannotations.miniormtool.annotations.DatabaseColumn;
 import com.kingshuk.reflectionsannotations.miniormtool.annotations.PrimaryKey;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
 @NoArgsConstructor
-@DatabaseEntity(tableName = "CATEGORY")
+@AllArgsConstructor
+@DatabaseEntity(tableName = "CATEGORY_REFLECTION_ANNOTATION")
+@Data
+@Builder
 public class CategoryEntity {
 
 	@PrimaryKey(columnName = "CTGRY_ID")
@@ -20,10 +19,10 @@ public class CategoryEntity {
 	@DatabaseColumn(columnName = "CTGRY_NM")
 	private String categoryName;
 	
-	@DatabaseColumn(columnName = "CTGRY_NM")
+	@DatabaseColumn(columnName = "CTGRY_DESC")
 	private String categoryDescription;
 
-	@DatabaseColumn(columnName = "CTGRY_NM")
+	@DatabaseColumn(columnName = "ACTIVE")
 	private int active;
 
 	public CategoryEntity(String categoryName, String categoryDescription, int active) {
