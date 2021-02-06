@@ -6,12 +6,15 @@ import java.io.Serializable;
  * Created by kingshuk on 11/12/17.
  */
 public class Employee implements Serializable{
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7516150772023201954L;
+	private String name;
     private String DOB;
     private String occupation;
-    transient private Integer SSN;
+    private transient Integer SSN;
 
-    private static final Integer serialVersionUID=-1;
 
     public String getName() {
         return name;
