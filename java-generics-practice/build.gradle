@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    implementation 'com.google.guava:guava:28.0-jre'
+
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
+    annotationProcessor 'org.projectlombok:lombok:1.18.18'
+}
+
+test {
+    useJUnitPlatform()
+}
