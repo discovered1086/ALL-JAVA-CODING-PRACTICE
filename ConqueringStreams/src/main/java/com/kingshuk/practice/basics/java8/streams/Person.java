@@ -1,17 +1,21 @@
 package com.kingshuk.practice.basics.java8.streams;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@Getter
+@Data
+@Builder
+@NoArgsConstructor
 public class Person {
 
-	private final String name;
+	private String name;
 
-	private final Gender gender;
+	private Gender gender;
 
-	private final int age;
+	private int age;
 
 	@Override
 	public String toString() {
