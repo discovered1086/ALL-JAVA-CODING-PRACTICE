@@ -1,6 +1,7 @@
 package com.kingshuk.reflectionsannotations.minidependencyinjection.repository.impl;
 
 
+import com.kingshuk.reflectionsannotations.minidependencyinjection.annotations.InjectDependency;
 import com.kingshuk.reflectionsannotations.minidependencyinjection.annotations.Repository;
 import com.kingshuk.reflectionsannotations.minidependencyinjection.model.Vehicle;
 import com.kingshuk.reflectionsannotations.minidependencyinjection.repository.IVehicleRepository;
@@ -10,7 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class VehicleRepository implements IVehicleRepository {
 
-    private static ConcurrentHashMap<Integer, Vehicle> vehicles = new ConcurrentHashMap<>();
+    @InjectDependency
+    private static ConcurrentHashMap<Integer, Vehicle> vehicles;
 
 
     @Override
