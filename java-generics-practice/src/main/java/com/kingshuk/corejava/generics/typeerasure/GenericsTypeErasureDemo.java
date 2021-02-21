@@ -1,4 +1,4 @@
-package com.kingshuk.corejava.generics;
+package com.kingshuk.corejava.generics.typeerasure;
 
 import java.util.ArrayList;
 import java.util.List;
