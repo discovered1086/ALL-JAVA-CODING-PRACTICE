@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id "org.checkerframework" version "0.5.16"
+}
+
+apply plugin: 'org.checkerframework'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+checkerFramework {
+    checkers = [
+            'org.checkerframework.checker.nullness.NullnessChecker',
+            'org.checkerframework.checker.units.UnitsChecker'
+    ]
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+    annotationProcessor('org.projectlombok:lombok:1.18.16')
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+
+    // https://mvnrepository.com/artifact/org.reflections/reflections
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
+
+    compileOnly 'org.checkerframework:checker-qual:3.4.0'
+    testCompileOnly 'org.checkerframework:checker-qual:3.4.0'
+    checkerFramework 'org.checkerframework:checker:3.4.0'
+}
+
+test {
+    useJUnitPlatform()
+}
