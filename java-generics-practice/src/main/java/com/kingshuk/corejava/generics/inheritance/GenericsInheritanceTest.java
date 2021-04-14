@@ -3,7 +3,6 @@ package com.kingshuk.corejava.generics.inheritance;
 import com.kingshuk.corejava.generics.inheritance.model.Animal;
 import com.kingshuk.corejava.generics.inheritance.model.Cat;
 import com.kingshuk.corejava.generics.inheritance.model.Dog;
-import com.kingshuk.corejava.generics.inheritance.model.Lion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,9 +63,12 @@ public class GenericsInheritanceTest {
         printAnimal(cats);
     }
 
-    private static void printAnimal(List<Animal> animals){
+    private static void printAnimal(List<?> animals){
         animals.forEach(System.out::println);
-        animals.add(new Lion("Sher Khan"));
+        //animals.add(new Lion("Sher Khan"));
+
+        //final Object o = animals.get(0);
+        //animals.add(new Object());
     }
 
     private static void printAnimalBehavior(AnimalBehavior<Animal> animalBehavior){
