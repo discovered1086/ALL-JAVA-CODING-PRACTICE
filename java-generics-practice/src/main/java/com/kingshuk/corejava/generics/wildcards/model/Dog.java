@@ -1,4 +1,4 @@
-package com.kingshuk.corejava.generics.wildcards.multiplebounds.model;
+package com.kingshuk.corejava.generics.wildcards.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,16 +9,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cat extends Animal implements IRun{
+public
+class Dog extends Animal implements IRun{
     private String name;
+    private String breed;
 
     @Override
     public void eats() {
-        System.out.println("Cat eats");
+        System.out.println("Dog eats");
     }
 
     @Override
     public void runs() {
-        System.out.println("Cat runs");
+        System.out.println("Dog runs");
     }
 }

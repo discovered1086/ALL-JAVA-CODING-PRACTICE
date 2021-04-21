@@ -1,7 +1,7 @@
 package com.kingshuk.corejava.generics.wildcards.multiplebounds;
 
 
-import com.kingshuk.corejava.generics.wildcards.multiplebounds.model.*;
+import com.kingshuk.corejava.generics.wildcards.model.*;
 
 import java.util.Arrays;
 import java.util.Collections;

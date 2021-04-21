@@ -1,4 +1,4 @@
-package com.kingshuk.corejava.generics.wildcards.multiplebounds.model;
+package com.kingshuk.corejava.generics.wildcards.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
