@@ -14,7 +14,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha1'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha5'
 }
 
 test {
